@@ -3,7 +3,8 @@ import injectSheet from 'react-jss'
 
 const style = {
   root:{
-    padding: "5px 10px"
+    padding: "5px 15px",
+    margin: '5px 0 20px 0'
   },
   dividerContainer: {
     width: '100%', 

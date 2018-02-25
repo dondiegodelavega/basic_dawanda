@@ -5,10 +5,10 @@ import FbIcon from 'react-icons/lib/fa/facebook';
 
 const style = {
   root : {
-    padding: "5px 10px"
+    padding: "5px 15px"
   },
   button : {
-    fontSize:14,
+    fontSize:16,
     padding: 10,
     backgroundColor: "#315a99",
     '&:hover':{
@@ -17,7 +17,7 @@ const style = {
   },
   fbIcon:{
     float:'left',
-    fontSize: 20
+    fontSize: 24
   }
 }
 
