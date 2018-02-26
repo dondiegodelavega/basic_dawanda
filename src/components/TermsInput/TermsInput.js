@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import injectSheet from 'react-jss'
-import  { FormGroup, Label, Input } from 'reactstrap';
+import  { FormGroup, Label, Input } from 'reactstrap'
+import WarningPopover from '../WarningPopover/WarningPopover'
 
 const style = {
   root:{
@@ -15,7 +16,7 @@ const style = {
     lineHeight: 1.5,
     paddingTop: 5,
     paddingleft: 5,
-    cursor:'pointer'
+    cursor:'default'
   },
   link:{
     cursor:'pointer',
@@ -31,10 +32,11 @@ class TermsInput extends Component {
       <div className={classes.root}>
         <FormGroup check>
           <Label check>
-            <Input type="checkbox" />{' '}
+            <Input id={this.props.id} type="checkbox" onClick={() => this.togglePopover()}/>{' '}
             <span className={classes.label}>Ich willige in die Verarbeitung und Nutzung meiner Daten gemäß der <span className={classes.link}>Datenschutzerklärung</span> ein.</span>
           </Label>
         </FormGroup>
+        <WarningPopover activate={toggle => this.togglePopover = toggle} target={this.props.id} text="muss ausgefullt werden"/>
       </div>
     );
   }

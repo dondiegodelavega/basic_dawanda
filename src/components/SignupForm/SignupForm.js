@@ -3,7 +3,7 @@ import injectSheet from 'react-jss'
 import UserIcon from 'react-icons/lib/fa/user'
 import EnvelopeIcon from 'react-icons/lib/fa/envelope'
 import { Button } from 'reactstrap'
-import InfoInput from '../InfoInput/InfoInput'
+import TextInput from '../TextInput/TextInput'
 import PasswordInput from '../PasswordInput/PasswordInput'
 import TermsInput from '../TermsInput/TermsInput'
 const style = {
@@ -30,12 +30,12 @@ class SignupForm extends Component {
       <div className={classes.root}>
         
         
-        <InfoInput label="Vorname" icon={<UserIcon/>}/>
-        <InfoInput label="NachName" icon={<UserIcon/>}/>
-        <InfoInput label="mitgliedsName" icon={<UserIcon/>} placeholder="Dein Mitgliedsname ist offentlich"/>
-        <InfoInput label="E-Mail" icon={<EnvelopeIcon/>}/>
-        <PasswordInput/>
-        <TermsInput/>
+        <TextInput id="lastName" label="Vorname" icon={<UserIcon/>}/>
+        <TextInput id="firstName" label="NachName" icon={<UserIcon/>}/>
+        <TextInput id="middleName" label="mitgliedsName" icon={<UserIcon/>} placeholder="Dein Mitgliedsname ist offentlich"/>
+        <TextInput id="email" label="E-Mail" icon={<EnvelopeIcon/>}/>
+        <PasswordInput id="password"/>
+        <TermsInput id="terms"/>
         <Button className={classes.button} block >
           Jetzt registrieren
         </Button>
