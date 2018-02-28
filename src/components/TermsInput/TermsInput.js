@@ -57,8 +57,8 @@ class TermsInput extends Component {
       <div className={classes.root}>
         <FormGroup check>
           <Label check>
-            <Input id={this.props.id} type="checkbox" checked={this.state.checked} onChange={() => this.updateCheckBox()}/>{' '}
-            <span className={classes.label}>Ich willige in die Verarbeitung und Nutzung meiner Daten gemäß der <span className={classes.link}>Datenschutzerklärung</span> ein.</span>
+            <Input  type="checkbox" checked={this.state.checked} onChange={() => this.updateCheckBox()}/>{' '}
+            <span id={this.props.id} className={classes.label}>Ich willige in die Verarbeitung und Nutzung meiner Daten gemäß der <span className={classes.link}>Datenschutzerklärung</span> ein.</span>
           </Label>
         </FormGroup>
         <WarningPopover activate={toggle => this.togglePopover = toggle} target={this.props.id} text="bitte akzeptieren Sie die Bedingungen"/>

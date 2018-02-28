@@ -29,7 +29,7 @@ class InputInfo extends Component {
     super(props);
 
     this.validate = this.validate.bind(this);
-    this.state = { inputValue:'', warningMessage : 'muss ausgefullt werden'};
+    this.state = { inputValue:'', warningMessage : 'muss ausgefullt werden', warning:false};
   }
 
   componentDidMount() {
@@ -44,24 +44,30 @@ class InputInfo extends Component {
 
   validateEmail(email) {
     var re = /\S+@\S+\.\S+/;
-    
     return re.test(email);
   }
 
   validate(){
     if(this.state.inputValue.trim() === ''){
-      this.setState({warningMessage : 'muss ausgefullt werden'});
+      this.setState({warningMessage : 'muss ausgefullt werden', warning : true});
       this.togglePopover()
     }else if(this.props.type === 'email' && !this.validateEmail(this.state.inputValue)){
-      this.setState({warningMessage : 'email ist ungültig'});
+      this.setState({warningMessage : 'email ist ungültig', warning : true});
       this.togglePopover()
     }else{
-      //
+      this.setState({warning : false});
     }
   }
 
   render() {
     const {classes} = this.props;
+
+    var otherProps = {};
+    if( this.state.warning){
+      otherProps = {
+        style : orangeBorder
+      };
+    }
 
     return (
       <div className={classes.root}>
@@ -72,7 +78,13 @@ class InputInfo extends Component {
               {this.props.icon}
             </InputGroupText>
           </InputGroupAddon>
-          <Input className={classes.input} style={orangeBorder} placeholder={this.props.placeholder} value={this.state.inputValue} onChange={event => this.updateInputValue(event)}/>
+          <Input className={classes.input}
+           
+            {...otherProps}
+
+            placeholder={this.props.placeholder} 
+            value={this.state.inputValue} 
+            onChange={event => this.updateInputValue(event)}/>
         </InputGroup>
         <WarningPopover activate={toggle => this.togglePopover = toggle} target={this.props.id} text={this.state.warningMessage}/>
       </div>

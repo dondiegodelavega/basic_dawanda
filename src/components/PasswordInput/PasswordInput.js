@@ -35,7 +35,7 @@ class PassWordInput extends Component {
     super(props);
 
     this.validate = this.validate.bind(this);
-    this.state = { inputValue:'', show: false};
+    this.state = { inputValue:'', show: false, warning:false};
   }
 
   componentDidMount() {
@@ -54,12 +54,22 @@ class PassWordInput extends Component {
 
   validate(){
     if(this.state.inputValue.trim() === ''){
+      this.setState({warning : true});
       this.togglePopover();
+    }else{
+      this.setState({warning : false});
     }
   }
 
   render() {
     const {classes} = this.props;
+
+    var otherProps = {};
+    if( this.state.warning){
+      otherProps = {
+        style : orangeBorder
+      };
+    }
 
     return (
       <div className={classes.root}>
@@ -72,8 +82,8 @@ class PassWordInput extends Component {
             </InputGroupText>
           </InputGroupAddon>
           { this.state.show ? 
-            (<Input className={classes.input} style={orangeBorder}  onChange={event => this.updateInputValue(event)}/>) :
-            (<Input type="password" className={classes.input} onChange={event => this.updateInputValue(event)}/>) 
+            (<Input {...otherProps} className={classes.input} style={orangeBorder}  onChange={event => this.updateInputValue(event)}/>) :
+            (<Input {...otherProps} type="password" className={classes.input} onChange={event => this.updateInputValue(event)}/>) 
           }
           <InputGroupAddon addonType="append">
             <InputGroupText className={classes.showPassContainer}>
