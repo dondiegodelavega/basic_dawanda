@@ -25,6 +25,31 @@ const style = {
 }
 
 class TermsInput extends Component {
+  constructor(props) {
+    super(props);
+
+    this.validate = this.validate.bind(this);
+    this.state = { checked: false};
+  }
+
+  componentDidMount() {
+    this.props.onSubmit(this.validate)
+  }
+
+  updateCheckBox() {
+    this.setState({
+      checked: !this.state.checked
+    });
+  }
+
+  validate(){
+    if(!this.state.checked){
+      this.togglePopover()
+    }else{
+      //
+    }
+  }
+
   render() {
     const {classes} = this.props;
 
@@ -32,11 +57,11 @@ class TermsInput extends Component {
       <div className={classes.root}>
         <FormGroup check>
           <Label check>
-            <Input id={this.props.id} type="checkbox" onClick={() => this.togglePopover()}/>{' '}
+            <Input id={this.props.id} type="checkbox" checked={this.state.checked} onChange={() => this.updateCheckBox()}/>{' '}
             <span className={classes.label}>Ich willige in die Verarbeitung und Nutzung meiner Daten gemäß der <span className={classes.link}>Datenschutzerklärung</span> ein.</span>
           </Label>
         </FormGroup>
-        <WarningPopover activate={toggle => this.togglePopover = toggle} target={this.props.id} text="muss ausgefullt werden"/>
+        <WarningPopover activate={toggle => this.togglePopover = toggle} target={this.props.id} text="bitte akzeptieren Sie die Bedingungen"/>
       </div>
     );
   }

@@ -26,13 +26,36 @@ const style = {
   }
 }
 
+const orangeBorder = {
+  borderColor:"orange"
+}
+
 class PassWordInput extends Component {
-  state = {
-    show: false
+  constructor(props) {
+    super(props);
+
+    this.validate = this.validate.bind(this);
+    this.state = { inputValue:'', show: false};
+  }
+
+  componentDidMount() {
+    this.props.onSubmit(this.validate)
+  }
+
+  updateInputValue(event) {
+    this.setState({
+      inputValue: event.target.value
+    });
   }
 
   toggleShow(){
     this.setState({show: !this.state.show})
+  }
+
+  validate(){
+    if(this.state.inputValue.trim() === ''){
+      this.togglePopover();
+    }
   }
 
   render() {
@@ -44,18 +67,18 @@ class PassWordInput extends Component {
         <Label className={classes.label}>Passwort</Label>
         <InputGroup>
           <InputGroupAddon addonType="prepend" >
-            <InputGroupText id={this.props.id} onClick={() => this.togglePopover()}>
+            <InputGroupText id={this.props.id}>
                 <LockIcon/>
             </InputGroupText>
           </InputGroupAddon>
           { this.state.show ? 
-            (<Input className={classes.input}/>) :
-            (<Input type="password" className={classes.input}/>) 
+            (<Input className={classes.input} style={orangeBorder}  onChange={event => this.updateInputValue(event)}/>) :
+            (<Input type="password" className={classes.input} onChange={event => this.updateInputValue(event)}/>) 
           }
           <InputGroupAddon addonType="append">
             <InputGroupText className={classes.showPassContainer}>
                 <Label check>
-                    <Input addon type="checkbox" onChange={this.toggleShow.bind(this)}/>
+                    <Input addon type="checkbox" onChange={this.toggleShow.bind(this)} value={this.state.inputValue}/>
                     <span className={classes.checkLabel}>Anzeigen</span>
                 </Label>
             </InputGroupText>

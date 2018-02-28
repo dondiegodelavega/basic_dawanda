@@ -18,6 +18,7 @@ const style = {
   },
   popoverHeader:{
     backgroundColor:'#fbe0a7',
+    fontSize: 12,
   }
 }
 

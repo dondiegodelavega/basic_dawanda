@@ -23,6 +23,16 @@ const style = {
 }
 
 class SignupForm extends Component {
+
+  submitForm(){
+    this.validateLastName();
+    this.validateFirstName();
+    this.validateMiddleName();
+    this.validateEmail();
+    this.validatePassword();
+    this.validateTerms();
+  }
+
   render() {
     const {classes} = this.props;
 
@@ -30,13 +40,19 @@ class SignupForm extends Component {
       <div className={classes.root}>
         
         
-        <TextInput id="lastName" label="Vorname" icon={<UserIcon/>}/>
-        <TextInput id="firstName" label="NachName" icon={<UserIcon/>}/>
-        <TextInput id="middleName" label="mitgliedsName" icon={<UserIcon/>} placeholder="Dein Mitgliedsname ist offentlich"/>
-        <TextInput id="email" label="E-Mail" icon={<EnvelopeIcon/>}/>
-        <PasswordInput id="password"/>
-        <TermsInput id="terms"/>
-        <Button className={classes.button} block >
+        <TextInput id="lastName" label="Vorname" icon={<UserIcon/>}  
+          onSubmit={validate => this.validateLastName = validate} />
+        <TextInput id="firstName" label="NachName" icon={<UserIcon/>}  
+          onSubmit={validate => this.validateFirstName = validate} />
+        <TextInput id="middleName" label="mitgliedsName" icon={<UserIcon/>} placeholder="Dein Mitgliedsname ist offentlich" 
+          onSubmit={validate => this.validateMiddleName = validate} />
+        <TextInput id="email" label="E-Mail" icon={<EnvelopeIcon/>} type="email" 
+          onSubmit={validate => this.validateEmail = validate}/>
+        <PasswordInput id="password" 
+          onSubmit={validate => this.validatePassword = validate}/>
+        <TermsInput id="terms" 
+          onSubmit={validate => this.validateTerms = validate}/>
+        <Button className={classes.button} block onClick={()=>this.submitForm()} >
           Jetzt registrieren
         </Button>
       </div>
